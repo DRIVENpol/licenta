@@ -9,7 +9,7 @@ const CampaignRows = () => {
   return (
     <Box p={5}>
         <Center>
-      <SimpleGrid columns={{ base: 1, md: 6 }} spacing={5}>
+      <SimpleGrid columns={["1", "2", "3", "4", "5",]} spacing={5}>
         {campaignCards.map((_, index) => (
           <CampaignCard key={index} />
         ))}

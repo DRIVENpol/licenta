@@ -12,12 +12,12 @@ const CampaignCard = () => {
   return (
     <Box
       maxW="sm"
-      borderWidth="1px"
+    //   borderWidth="1px"
       borderRadius="lg"
       overflow="hidden"
-      bg="white"
+      bg="black"
       boxShadow="md"
-      color='black'
+      color='white'
       p={5}
       m={5}
     >

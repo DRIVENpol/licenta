@@ -5,7 +5,7 @@ import { Box } from '@chakra-ui/react'
 const all_campaigns = () => {
   return (
     <>
-      <Box bg='grayAlpha.700'>
+      <Box bg='gray.800'>
         <CampaignRows />
       </Box>
     </>
