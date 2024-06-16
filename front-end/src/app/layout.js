@@ -1,7 +1,13 @@
-import { Inter } from "next/font/google";
-import "./globals.css";
+import { headers } from 'next/headers'
 
-const inter = Inter({ subsets: ["latin"] });
+import { Providers } from "./providers";
+
+import { cookieToInitialState } from 'wagmi'
+import { config } from "../../config";
+import Web3ModalProvider from "../../context";
+
+// UI/UX
+import Navbar from '../../components/Header';
 
 export const metadata = {
   title: "Create Next App",
@@ -9,9 +15,18 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  const initialState = cookieToInitialState(config, headers().get('cookie'))
+
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body>
+        <Providers>
+        <Web3ModalProvider initialState={initialState}>
+          <Navbar />
+          {children}
+          </Web3ModalProvider>
+        </Providers>
+      </body>
     </html>
   );
 }
