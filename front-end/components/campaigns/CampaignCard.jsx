@@ -15,7 +15,7 @@ const CampaignCard = () => {
     //   borderWidth="1px"
       borderRadius="lg"
       overflow="hidden"
-      bg="black"
+      bg="gray.700"
       boxShadow="md"
       color='white'
       p={5}
@@ -33,7 +33,7 @@ const CampaignCard = () => {
         </Box>
 
         <Box mt={2}>
-          <Text fontSize="md" color="gray.600">
+          <Text fontSize="md" color="gray.200">
             {description}
           </Text>
         </Box>
