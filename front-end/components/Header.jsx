@@ -49,7 +49,7 @@ const Navbar = () => {
             display={{ base: 'none', md: 'flex' }}
           >
             <NavLink href={'/'}>Home</NavLink>
-            <NavLink href={'/campaigns'}>My Campaigns</NavLink>
+            <NavLink href={'/campaigns'}>Campaigns</NavLink>
             <NavLink href={'/donations'}>My Donations</NavLink>
           </HStack>
         </HStack>
