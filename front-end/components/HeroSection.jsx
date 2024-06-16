@@ -42,7 +42,7 @@ const HeroSection = () => {
           <Button colorScheme="teal" variant="solid" size="lg">
             Create a campaign
           </Button>
-          <Button colorScheme="teal" variant="outline" size="lg">
+          <Button colorScheme="white" variant="outline" size="lg">
             Explore campaigns
           </Button>
         </Stack>
