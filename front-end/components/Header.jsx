@@ -41,7 +41,7 @@ const Navbar = () => {
           display={{ md: 'none' }}
           onClick={isOpen ? onClose : onOpen}
         />
-        <HStack spacing={8} alignItems={'center'}>
+        <HStack spacing={8} alignItems={'center'} color='white'>
           <Box><Text as='b'>cDonor</Text></Box>
           <HStack
             as={'nav'}
