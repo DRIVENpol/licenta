@@ -23,7 +23,13 @@ const CampaignCard = ({ id, title, description, askAmount, donated, imageLink })
     >
       <Center>
         <VStack>
-          <Image src={imageLink || "https://via.placeholder.com/300"} alt="Campaign Image" />
+          <Image 
+            src={imageLink || "https://via.placeholder.com/300"} 
+            alt="Campaign Image" 
+            boxSize="300px" 
+            objectFit="cover" 
+            borderRadius="md"
+          />
 
           <Box p={6}>
             <Box d="flex" alignItems="baseline">
