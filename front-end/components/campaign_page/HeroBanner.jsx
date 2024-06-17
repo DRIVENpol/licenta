@@ -49,7 +49,7 @@ const HeroBanner = ({ campaign, refreshDonations }) => {
       setAmount('');
       setDescription('');
       onClose();
-      refreshDonations();
+      refreshDonations(); 
     } catch (error) {
       toast({
         title: 'An error occurred.',

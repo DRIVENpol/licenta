@@ -31,6 +31,9 @@ const CampaignPage = () => {
       const response = await fetch(`http://localhost:3001/campaigns/${id}/donations`);
       const data = await response.json();
       setDonations(data);
+      const updatedCampaignResponse = await fetch(`http://localhost:3001/campaigns/${id}`);
+      const updatedCampaign = await updatedCampaignResponse.json();
+      setCampaign(updatedCampaign);
     } catch (error) {
       console.error('Error fetching donations:', error);
     }
