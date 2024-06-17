@@ -6,7 +6,7 @@ const Transfers = ({ withdrawals }) => {
   return (
     <Box mb={5}>
       <Heading as="h3" size="lg" mb={4}>Withdrawals</Heading>
-      <List spacing={3} color='black'>
+      <List spacing={3}>
         {withdrawals.map((withdrawal, index) => (
           <ListItem key={index} p={4} bg="white" borderRadius="md" boxShadow="md">
             <Flex justify="space-between">

@@ -14,6 +14,8 @@ const Donations = ({ donations }) => {
               <Text>{`${donation.amount} ETH`}</Text>
             </Flex>
             <Text color="gray.500" fontSize="sm">{new Date(donation.date).toLocaleString()}</Text>
+            <br />
+            <Text>Message: {`${donation.description}`}</Text>
           </ListItem>
         ))}
       </List>

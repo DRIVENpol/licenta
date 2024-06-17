@@ -1,32 +1,42 @@
 'use client'
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Text, Progress, Flex, Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react';
 import HeroBanner from '../../../../../components/campaign_page/HeroBanner';
 import Donations from '../../../../../components/campaign_page/Donations';
 import Transfers from '../../../../../components/campaign_page/Transfers';
+import { useParams } from 'next/navigation';
 
 const CampaignPage = () => {
-  // Dummy data
-  const campaign = {
-    title: "Help Build a School",
-    description: "We are raising funds to build a new school in our community. Your contribution will help provide better education for children.",
-    imageUrl: "https://via.placeholder.com/300",
-    askAmount: 10000,
-    donatedAmount: 5000,
-    socialLinks: {
-      twitter: "https://twitter.com",
-      facebook: "https://facebook.com",
-      instagram: "https://instagram.com"
-    },
-    donations: [
-      { donor: "0x1234...abcd", amount: 1.0, date: "2024-06-16 12:00:00" },
-      { donor: "0x5678...efgh", amount: 0.5, date: "2024-06-15 14:30:00" }
-    ],
-    withdrawals: [
-      { recipient: "0xabcd...1234", amount: 0.3, date: "2024-06-15 18:00:00" },
-      { recipient: "0xefgh...5678", amount: 0.2, date: "2024-06-14 10:00:00" }
-    ]
+  const { id } = useParams();
+  const [campaign, setCampaign] = useState(null);
+  const [donations, setDonations] = useState([]);
+
+  useEffect(() => {
+    const fetchCampaign = async () => {
+      try {
+        const response = await fetch(`http://localhost:3001/campaigns/${id}`);
+        const data = await response.json();
+        setCampaign(data);
+        setDonations(data.donations);
+      } catch (error) {
+        console.error('Error fetching campaign:', error);
+      }
+    };
+
+    fetchCampaign();
+  }, [id]);
+
+  const refreshDonations = async () => {
+    try {
+      const response = await fetch(`http://localhost:3001/campaigns/${id}/donations`);
+      const data = await response.json();
+      setDonations(data);
+    } catch (error) {
+      console.error('Error fetching donations:', error);
+    }
   };
+
+  if (!campaign) return <Text>Loading...</Text>;
 
   return (
     <Flex
@@ -36,10 +46,10 @@ const CampaignPage = () => {
       bg='gray.800'
       color='white'
     >
-      <HeroBanner campaign={campaign} />
+      <HeroBanner campaign={campaign} refreshDonations={refreshDonations} />
       <Box mb={5}>
-        <Text fontSize="2xl" fontWeight="bold">${campaign.donatedAmount} raised of ${campaign.askAmount}</Text>
-        <Progress value={(campaign.donatedAmount / campaign.askAmount) * 100} size="lg" colorScheme="teal" mt={2} />
+        <Text fontSize="2xl" fontWeight="bold">${campaign.donated} raised of ${campaign.askAmount}</Text>
+        <Progress value={(campaign.donated / campaign.askAmount) * 100} size="lg" colorScheme="teal" mt={2} />
       </Box>
       <Tabs variant="soft-rounded" colorScheme="teal" mt={5}>
         <TabList>
@@ -54,7 +64,7 @@ const CampaignPage = () => {
             borderRadius="md"
             boxShadow="lg"
           >
-            <Donations donations={campaign.donations} />
+            <Donations donations={donations} />
           </TabPanel>
           <TabPanel
             p={5}
