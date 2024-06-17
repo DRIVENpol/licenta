@@ -21,7 +21,7 @@ const CampaignRows = () => {
   }, []);
 
   return (
-    <Box p={5}>
+    <Box p={5} minH='calc(100vh)'>
       <Center>
         <SimpleGrid columns={{ base: 1, md: 2, lg: 3, xl: 4 }} spacing={5}>
           {campaigns.map((campaign) => (

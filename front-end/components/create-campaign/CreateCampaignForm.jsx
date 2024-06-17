@@ -78,7 +78,7 @@ const CreateCampaignForm = () => {
   };
 
   return (
-    <Box p={5} bg="gray.800" color="white" borderRadius="md" boxShadow="md">
+    <Box p={5} bg="gray.800" color="white" borderRadius="md" boxShadow="md" minH='calc(100vh)'>
       <form onSubmit={handleSubmit}>
         <VStack spacing={4}>
           <FormControl id="id" isRequired>
