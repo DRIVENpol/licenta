@@ -1,6 +1,7 @@
 'use client'
 import React, { useState } from 'react';
-import { Box, FormControl, FormLabel, Input, Textarea, Button, VStack, HStack, useToast } from '@chakra-ui/react';
+import { Box, FormControl, FormLabel, Input, Textarea, Button, VStack, useToast } from '@chakra-ui/react';
+import { useRouter } from 'next/navigation';
 
 const CreateCampaignForm = () => {
   const [formData, setFormData] = useState({
@@ -16,6 +17,7 @@ const CreateCampaignForm = () => {
   });
 
   const toast = useToast();
+  const router = useRouter();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -56,6 +58,7 @@ const CreateCampaignForm = () => {
           facebook: '',
           instagram: ''
         });
+        router.push('/campaigns');
       } else {
         const errorData = await response.json();
         toast({

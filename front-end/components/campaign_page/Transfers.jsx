@@ -62,9 +62,12 @@ const Transfers = ({ withdrawals, isCreator, refreshWithdrawals, campaignId }) =
     }
   };
 
+  const totalWithdrawn = withdrawals.reduce((total, withdrawal) => total + Number(withdrawal.amount), 0);
+
   return (
     <Box mb={5}>
       <Heading as="h3" size="lg" mb={4}>Withdrawals</Heading>
+      <Text fontSize="xl" mb={4}>{`Total Withdrawn: ${totalWithdrawn} ETH`}</Text>
       {/* {isCreator && ( */}
       {!isCreator && (
         <>
