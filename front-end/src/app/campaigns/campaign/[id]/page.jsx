@@ -10,6 +10,8 @@ const CampaignPage = () => {
   const { id } = useParams();
   const [campaign, setCampaign] = useState(null);
   const [donations, setDonations] = useState([]);
+  const [withdrawals, setWithdrawals] = useState([]);
+  const user = '0x1234...abcd';
 
   useEffect(() => {
     const fetchCampaign = async () => {
@@ -18,6 +20,7 @@ const CampaignPage = () => {
         const data = await response.json();
         setCampaign(data);
         setDonations(data.donations);
+        setWithdrawals(data.withdrawals);
       } catch (error) {
         console.error('Error fetching campaign:', error);
       }
@@ -25,6 +28,16 @@ const CampaignPage = () => {
 
     fetchCampaign();
   }, [id]);
+
+  const refreshWithdrawals = async () => {
+    try {
+      const response = await fetch(`http://localhost:3001/campaigns/${id}/withdrawals`);
+      const data = await response.json();
+      setWithdrawals(data);
+    } catch (error) {
+      console.error('Error fetching withdrawals:', error);
+    }
+  };
 
   const refreshDonations = async () => {
     try {
@@ -41,6 +54,8 @@ const CampaignPage = () => {
 
   if (!campaign) return <Text>Loading...</Text>;
 
+  const isCreator = user === campaign.beneficiaryAddress;
+
   return (
     <Flex
       direction="column"
@@ -49,7 +64,7 @@ const CampaignPage = () => {
       bg='gray.800'
       color='white'
     >
-      <HeroBanner campaign={campaign} refreshDonations={refreshDonations} />
+      <HeroBanner campaign={campaign} refreshDonations={refreshDonations} user={user} />
       <Box mb={5}>
         <Text fontSize="2xl" fontWeight="bold">${campaign.donated} raised of ${campaign.askAmount}</Text>
         <Progress value={(campaign.donated / campaign.askAmount) * 100} size="lg" colorScheme="teal" mt={2} />
@@ -75,7 +90,7 @@ const CampaignPage = () => {
             borderRadius="md"
             boxShadow="lg"
           >
-            <Transfers withdrawals={campaign.withdrawals} />
+            <Transfers withdrawals={withdrawals} isCreator={isCreator} refreshWithdrawals={refreshWithdrawals} campaignId={id} />
           </TabPanel>
         </TabPanels>
       </Tabs>

@@ -98,7 +98,7 @@ const HeroBanner = ({ campaign, refreshDonations }) => {
         <Button colorScheme="teal" size="lg" mt={4} onClick={onOpen}>Donate</Button>
       </VStack>
 
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Donate to {campaign.name}</ModalHeader>

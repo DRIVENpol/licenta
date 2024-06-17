@@ -111,22 +111,23 @@ app.get('/campaigns/:id/donations', async (req, res) => {
 app.post('/campaigns/:id/withdrawals', async (req, res) => {
   try {
     const { id } = req.params;
-    const { recipient, amount } = req.body;
+    const { recipient, amount, description } = req.body; 
 
-    if (!recipient || !amount) {
-      return res.status(400).send({ error: 'Recipient and amount are required.' });
+    if (!recipient || !amount || !description) {
+      return res.status(400).send({ error: 'Recipient, amount, and description are required.' });
     }
 
     const withdrawal = new Withdrawal({
       recipient,
-      amount,
-      campaign: id,
+      amount: parseFloat(amount),
+      description,
+      campaign: id
     });
 
     await withdrawal.save();
 
     const campaign = await Campaign.findOne({ id });
-    campaign.spentAmount += amount;
+    campaign.spentAmount += parseFloat(amount);
     campaign.withdrawals.push(withdrawal._id);
     await campaign.save();
 

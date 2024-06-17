@@ -1,7 +1,18 @@
+'use client'
 import React from 'react';
 import { Box, Text, Button, Stack } from '@chakra-ui/react';
-
+import { useRouter } from 'next/navigation';
 const HeroSection = () => {
+  const router = useRouter();
+
+  const handleCreateCampaign = () => {
+    router.push('/create-campaign');
+  };
+
+  const handleExploreCampaigns = () => {
+    router.push('/campaigns');
+  };
+
   return (
     <Box
       position="relative"
@@ -39,10 +50,10 @@ const HeroSection = () => {
           The first crypto donations app. Built on Ethereum using EVM compatible smart contracts!
         </Text>
         <Stack direction={{ base: 'column', md: 'row' }} spacing={4}>
-          <Button colorScheme="teal" variant="solid" size="lg">
+          <Button colorScheme="teal" variant="solid" size="lg" onClick={handleCreateCampaign}>
             Create a campaign
           </Button>
-          <Button colorScheme="white" variant="outline" size="lg">
+          <Button colorScheme="white" variant="outline" size="lg" onClick={handleExploreCampaigns}>
             Explore campaigns
           </Button>
         </Stack>

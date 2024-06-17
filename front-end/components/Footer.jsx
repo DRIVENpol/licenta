@@ -12,7 +12,7 @@ const Footer = () => {
       color="white"
       textAlign="center"
     >
-      <Text>© 2024 Your Company. All rights reserved.</Text>
+      <Text>© 2024 cDonor. All rights reserved.</Text>
     </Box>
   );
 };
